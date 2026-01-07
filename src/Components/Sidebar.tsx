@@ -74,26 +74,38 @@ const Sidebar: React.FC<SidebarProps> = ({
 
     return (
         <>
-            {!isMobile && (
-                <Drawer
-                    variant="persistent"
-                    open={open}
-                    sx={{
+            {/* {!isMobile && ( */}
+            <Drawer
+                variant="persistent"
+                open={open}
+                sx={{
+                    width: drawerWidth,
+                    "& .MuiDrawer-paper": {
                         width: drawerWidth,
-                        "& .MuiDrawer-paper": {
-                            width: drawerWidth,
-                        },
+                    },
+                }}
+            >
+                {drawerContent}
+            </Drawer>
+            {/* )} */}
+
+            {isMobile && (
+                <Drawer
+                    anchor="right"
+                    open={mobileOpen}
+                    onClose={onMobileClose}
+                    PaperProps={{
+                        sx: {
+                            // height: 'auto',
+                            // maxHeight: '100vh',
+                            overflowY: 'auto'
+                        }
                     }}
                 >
                     {drawerContent}
                 </Drawer>
             )}
 
-            {isMobile && (
-                <Drawer anchor="right" open={mobileOpen} onClose={onMobileClose}>
-                    {drawerContent}
-                </Drawer>
-            )}
         </>
     );
 };
